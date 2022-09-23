@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const Home: NextPage = () => {
@@ -13,7 +13,18 @@ const Home: NextPage = () => {
   const [isSeverelyObese, setSeverelyObese] = useState(false)
   const [imc, setImc] = useState(0)
 
-  const { handleSubmit, register, reset } = useForm()
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { isSubmitSuccessful },
+  } = useForm()
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset()
+    }
+  })
 
   function handleCalc(data: any) {
     const { peso, altura } = data
@@ -65,14 +76,14 @@ const Home: NextPage = () => {
                 required
                 {...register('altura')}
                 className='w-52 rounded-lg border-blue-600 text-blue-600'
-                placeholder='Altura'
+                placeholder='Digite a Altura'
               />
 
               <input
                 type='text'
                 {...register('peso')}
                 className='w-52 ml-2 rounded-lg border-blue-600 text-blue-600'
-                placeholder='Peso'
+                placeholder='Digite o Peso'
               />
             </div>
           </div>
@@ -85,14 +96,17 @@ const Home: NextPage = () => {
             </button>
             <button
               type='button'
-              onClick={() => {
-                reset()
-              }}
               className='w-52 h-10 ml-2 font-semibold rounded-lg text-white bg-red-600'
             >
               Limpar
             </button>
           </div>
+          <input
+            type='text'
+            value={imc.toFixed(1)}
+            disabled
+            className='text-center w-424px rounded-lg border-blue-600 text-white bg-blue-600'
+          />
         </form>
 
         <table className='table-auto text-center mt-8'>
@@ -135,12 +149,6 @@ const Home: NextPage = () => {
             </tr>
           </tbody>
         </table>
-        <input
-          type='text'
-          value={imc.toFixed(1)}
-          disabled
-          className='text-center rounded-lg border-blue-600 text-white bg-blue-600'
-        />
       </div>
     </>
   )
