@@ -5,7 +5,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }
