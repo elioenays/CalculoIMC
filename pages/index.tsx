@@ -90,15 +90,9 @@ const Home: NextPage = () => {
           <div className='flex justify-center'>
             <button
               type='submit'
-              className='w-52 h-10 font-semibold rounded-lg text-white bg-blue-600'
+              className='w-424px h-10 font-semibold rounded-lg text-white bg-blue-600'
             >
               Calcular
-            </button>
-            <button
-              type='button'
-              className='w-52 h-10 ml-2 font-semibold rounded-lg text-white bg-red-600'
-            >
-              Limpar
             </button>
           </div>
           <input
