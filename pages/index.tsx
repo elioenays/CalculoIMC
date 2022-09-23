@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const [isThinness, setThinness] = useState(false)
@@ -17,8 +16,7 @@ const Home: NextPage = () => {
 
     let imc = peso / altura ** 2
 
-    console.log(imc.toFixed(1))
-    console.log(isSeverelyObese)
+    console.log(imc)
 
     if (imc < 18.5) {
       setThinness(true)
@@ -45,7 +43,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className=''>
         <form action='' onSubmit={handleSubmit(handleCalc)}>
           Altura
           <input type='text' {...register('altura')} />
@@ -54,42 +52,45 @@ const Home: NextPage = () => {
           <button type='submit'>Calcular</button>
         </form>
 
-        <table>
-          <tr>
-            <td>IMC</td>
-            <td>Classificação</td>
-            <td>Obesidade (grau)</td>
-          </tr>
+        <table className='table-auto text-center'>
+          <thead>
+            <tr>
+              <th>IMC</th>
+              <th>Classificação</th>
+              <th>Obesidade (grau)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ color: isThinness ? 'red' : 'none' }}>
+              <td>Menor que 18,5</td>
+              <td>Magreza</td>
+              <td>0</td>
+            </tr>
 
-          <tr style={{ color: isThinness ? 'red' : 'none' }}>
-            <td>Menor que 18,5</td>
-            <td>Magreza</td>
-            <td>0</td>
-          </tr>
+            <tr style={{ color: isNormal ? 'red' : 'none' }}>
+              <td>Entre 18,5 e 24,9</td>
+              <td>Normal</td>
+              <td>0</td>
+            </tr>
 
-          <tr style={{ color: isNormal ? 'red' : 'none' }}>
-            <td>Entre 18,5 e 24,9</td>
-            <td>Normal</td>
-            <td>0</td>
-          </tr>
+            <tr style={{ color: isOverWeight ? 'red' : 'none' }}>
+              <td>Entre 25,0 e 29,9</td>
+              <td>Sobrepeso</td>
+              <td>I</td>
+            </tr>
 
-          <tr style={{ color: isOverWeight ? 'red' : 'none' }}>
-            <td>Entre 25,0 e 29,9</td>
-            <td>Sobrepeso</td>
-            <td>I</td>
-          </tr>
+            <tr style={{ color: isObese ? 'red' : 'none' }}>
+              <td>Entre 30,0 e 39,9</td>
+              <td>Obesidade</td>
+              <td>II</td>
+            </tr>
 
-          <tr style={{ color: isObese ? 'red' : 'none' }}>
-            <td>Entre 30,0 e 39,9</td>
-            <td>Obesidade</td>
-            <td>II</td>
-          </tr>
-
-          <tr style={{ color: isSeverelyObese ? 'red' : 'none' }}>
-            <td>Maior que 40,0</td>
-            <td>Obesidade Grave</td>
-            <td>III</td>
-          </tr>
+            <tr style={{ color: isSeverelyObese ? 'red' : 'none' }}>
+              <td>Maior que 40,0</td>
+              <td>Obesidade Grave</td>
+              <td>III</td>
+            </tr>
+          </tbody>
         </table>
         <input disabled>{}</input>
       </div>
