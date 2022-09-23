@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   const [isSeverelyObese, setSeverelyObese] = useState(false)
   const [imc, setImc] = useState(0)
 
-  const { handleSubmit, register } = useForm()
+  const { handleSubmit, register, reset } = useForm()
 
   function handleCalc(data: any) {
     const { peso, altura } = data
@@ -54,9 +54,9 @@ const Home: NextPage = () => {
         <h1>{title}</h1>
 
         <form
-          action=''
           onSubmit={handleSubmit(handleCalc)}
           className='mt-8 space-y-6'
+          id='form'
         >
           <div>
             <div>
@@ -82,6 +82,15 @@ const Home: NextPage = () => {
               className='w-52 h-10 font-semibold rounded-lg text-white bg-blue-600'
             >
               Calcular
+            </button>
+            <button
+              type='button'
+              onClick={() => {
+                reset()
+              }}
+              className='w-52 h-10 ml-2 font-semibold rounded-lg text-white bg-red-600'
+            >
+              Limpar
             </button>
           </div>
         </form>
